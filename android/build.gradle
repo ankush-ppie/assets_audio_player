@@ -2,14 +2,14 @@ group 'com.github.florent37.assets_audio_player'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.22'
+    ext.kotlin_version = '1.9.0'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.2'
+        classpath 'com.android.tools.build:gradle:8.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,7 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 34
+    compileSdk 33
 
     if (project.android.hasProperty("namespace")) {
         namespace 'com.github.florent37.assets_audio_player'
@@ -44,9 +44,16 @@ android {
     packagingOptions {
         exclude "DebugProbesKt.bin"
     }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+        // Sets Java compatibility to Java 11
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
